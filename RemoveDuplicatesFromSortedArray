@@ -1,0 +1,44 @@
+import java.util.Arrays;
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        
+        
+        // Brute force
+//         int count = 0;
+//         // int n = nums.length;
+        
+//         for(int i = 0; i < nums.length-1; i++){
+//             for(int j = i+1; j < nums.length; j++){
+//                 if(nums[i] == nums[j]){
+//                     nums[j] = Integer.MAX_VALUE;
+//                     // count++;
+//                 }else{
+//                     break;
+//                 }
+//             }
+//         }
+        
+//         Arrays.sort(nums);
+//         // int n = nums.length;
+//         // return n-count;
+//         for(int i = 0; i < nums.length; i++){
+//             if(nums[i] != Integer.MAX_VALUE){
+//                 count++;
+//             }
+//         }
+        
+//         return count;
+        
+        
+        // Optimized approach --> O(1) space, O(n) time.
+        int uni = 0;
+        for(int i = 0; i < nums.length-1; i++){
+            if(nums[i] != nums[i+1]){
+                nums[uni+1] = nums[i+1];
+                uni++;
+            }
+            
+        }
+        return uni+1;
+    }
+}
