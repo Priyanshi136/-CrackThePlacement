@@ -1,0 +1,63 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        
+        
+        // Through count variable.
+//         int i = 0;
+//         int j = 0;
+//         int k = 0;
+        
+//         for(int l = 0; l < nums.length; l++){
+//             if(nums[l] == 0){
+//                 i++;
+//             }else if(nums[l] == 1){
+//                 j++;
+//             } else{
+//                 k++;
+//             }
+//         }
+        
+//         int m = 0;
+//         while(i > 0){
+//             nums[m] = 0;
+//             m++;
+//             i--;
+//         }
+        
+//         while(j > 0){
+//             nums[m] = 1;
+//             m++;
+//             j--;
+//         }
+        
+//         while(k > 0){
+//             nums[m] = 2;
+//             m++;
+//             k--;
+//         }
+        
+        // Through Dutch National Flag Algo.
+        int low = 0;
+        int high = nums.length-1;
+        int mid = 0;
+        
+        while(mid <= high){
+            
+            if(nums[mid] == 0){
+                int temp = nums[mid];
+                nums[mid] = nums[low];
+                nums[low] = temp;
+                mid++;
+                low++;
+            }else if(nums[mid] == 2){
+                int temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+                // mid++;
+                high--;
+            }else{
+                mid++;
+            }
+        }
+    }
+}
