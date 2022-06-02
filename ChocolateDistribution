@@ -1,0 +1,16 @@
+class Solution
+{
+    public long findMinDiff (ArrayList<Integer> a, int n, int m)
+    {
+        // your code here
+        // Simply used sorting, Hence time-> O(nlogn) and space-> O(1).
+        Collections.sort(a);
+        
+        int ret = Integer.MAX_VALUE;
+        for(int i = 0; i+m-1 < n; i++){
+            int k = a.get(m+i-1) - a.get(i);
+            ret = Math.min(ret, k);
+        }
+        return ret;
+    }
+}
