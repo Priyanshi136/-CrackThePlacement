@@ -1,0 +1,17 @@
+class Solution {
+    public void moveZeroes(int[] nums) {
+        
+        // some other ways are like using additional array(space -> O(n)) and another is by counting the zeroes(more operations)
+        // using two pointer algorithm i.e. one runs fast and another one is slow.(less operations, space -> O(1)).
+        int ptr = 0;
+        for(int curr = 0; curr < nums.length; curr++){
+            if(nums[curr] != 0){
+                int temp = nums[curr];
+                nums[curr] = nums[ptr];
+                nums[ptr] = temp;
+                ptr++;
+            }
+        }
+        
+    }
+}
