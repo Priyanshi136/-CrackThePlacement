@@ -1,0 +1,105 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        
+        // Brute force(space -> O(mn)).
+        int m = matrix.length;
+        if(m == 0){
+            return;
+        }
+        int n = matrix[0].length;
+//         int store[][] = new int [m][n];
+        
+//         for(int  i = 0; i < m; i++){
+//             for(int j = 0; j < n; j++){
+//                 if(matrix[i][j] == 0){
+//                     store[i][j]++;
+//                 }
+//             }
+//         }
+        
+//         for(int i = 0; i < m; i++){
+//             for(int j = 0; j < n; j++){
+//                 if(store[i][j] == 1){
+//                     for(int k = 0; k < m; k++){
+//                         matrix[k][j] = 0;
+//                     }
+//                     for(int l = 0; l < n; l++){
+//                         matrix[i][l] = 0;
+//                     }
+//                 }
+//             }
+//         }
+        
+        // By using some type of marker. Hence space -> O(1) {But not passing for all}
+        // for(int  i = 0; i < m; i++){
+        //     for(int j = 0; j < n; j++){
+        //         if(matrix[i][j] == 0){
+        //             matrix[i][j] = Integer.MIN_VALUE;
+        //         }
+        //     }
+        // }
+        // for(int i = 0; i < m; i++){
+        //     for(int j = 0; j < n; j++){
+        //         if(matrix[i][j] == Integer.MIN_VALUE){
+        //             matrix[i][j] = 0;
+        //             for(int k = 0; k < m; k++){
+        //                 if(matrix[k][j] != Integer.MIN_VALUE){
+        //                     matrix[k][j] = 0;
+        //                 }
+        //             }
+        //             for(int l = 0; l < n; l++){
+        //                 if(matrix[i][l] != Integer.MIN_VALUE){
+        //                     matrix[i][l] = 0;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        
+        // best approach, space-> O(1) and running for all testcases.
+        // through taking first row and column as a flag.
+        boolean firstrow = false;
+        boolean firstcol = false;
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(matrix[i][j] == 0){
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                    if(i == 0){
+                        firstrow = true;
+                    }
+                    if(j == 0){
+                        firstcol = true;
+                    }
+                }
+            }
+        }
+        
+        for(int i = 1; i < m; i++){
+            if(matrix[i][0] == 0){
+                    for(int k = 0; k < n; k++){
+                        matrix[i][k] = 0;
+                    }
+                }
+        }
+            for(int j = 1; j < n; j++){
+                
+                if(matrix[0][j] == 0){
+                    for(int l = 0; l < m; l++){
+                        matrix[l][j] = 0;
+                    }
+                }
+            }
+        
+        if(firstcol){
+            for(int i = 0; i < m; i++){
+                matrix[i][0] = 0;
+            }
+        }
+        if(firstrow){
+            for(int i = 0; i < n; i++){
+                matrix[0][i] = 0;
+            }
+        }
+    }
+}
