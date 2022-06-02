@@ -1,0 +1,34 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        // Brute force, time -> O(n2), two passes
+        // int max = 0;
+        // for(int i = 0; i < prices.length; i++){
+        //     for(int j = i; j < prices.length; j++){
+        //         int cur = prices[j] - prices[i];
+        //         if(cur > max){
+        //             max = cur;
+        //         }
+        //     }
+        // }
+        // return max;
+        
+        // optimized approach, one pass, time -> O(n).
+        int lsf = Integer.MAX_VALUE;
+        int of = 0;
+        int pisd = 0;
+        
+        for(int i = 0; i < prices.length; i++){
+            if(prices[i] < lsf){
+                lsf = prices[i];
+            }
+            pisd = prices[i] - lsf;
+            if(pisd > of){
+                of = pisd;
+            }
+        }
+        
+        return of;
+        
+    }
+}
