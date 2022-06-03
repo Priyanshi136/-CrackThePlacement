@@ -1,0 +1,42 @@
+import java.util.*;
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        
+        int ret[] = new int[2];
+        
+        // Using HashMaps, Hence space -> O(n), but time is O(n) only due to the for loops.
+        // But here we did it just in the one pass, i.e. only traversed once and did both           //working i.e. checking and the filling of hashmap.
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for(int i = 0; i < nums.length; i++){
+            int s = target - nums[i];
+            
+            if(map.containsKey(s)){
+                int n = map.get(s);
+                if(n != i){
+                    ret[0] = i;
+                    ret[1] = n;
+                    return ret;
+                }
+            }
+            map.put(nums[i], i);
+        }
+        
+//         for(int i = 0; i < nums.length; i++){
+            
+//         }
+        return ret;
+        
+        // for(int i = 0; i < nums.length-1; i++){
+        //     int a = target - nums[i];
+        //     int b = binarySearch(nums, a, i+1, nums.length-1);
+        //     if(b != -1){
+        //         ret[0] = i;
+        //         ret[1] = b;
+        //         return ret;
+        //     }
+        // }
+        // return ret;
+    }
+    
+}
