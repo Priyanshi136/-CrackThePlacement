@@ -1,0 +1,104 @@
+import java.lang.Math;
+class Solution {
+    public int findDuplicate(int[] nums) {
+        
+        // not correct code because there is not necessarily present 1 to n numbers. It's              just in the range of 1 to N. Method Idea -> sum of n numbers.
+//         int sum = 0;
+//         for(int i = 0; i < nums.length; i++){
+//             sum += nums[i];
+//         }
+        
+//         int ret = (nums.length-1)* nums.length/2;
+//         return sum-ret;
+        
+        
+        // run perfectly, but the given array is modified. Hence not acceptable.
+        // Arrays.sort(nums);
+        // for(int i = 0; i < nums.length-1; i++){
+        //     if(nums[i] == nums[i+1]){
+        //         return nums[i];
+        //     }
+        // }
+        // return nums[nums.length-1];
+        
+        
+        // runs perfectly, but space -> O(n) and time is also O(n).
+        // int freq[] = new int[nums.length+1];
+        // for(int i = 0; i < nums.length; i++){
+        //     freq[nums[i]]++;
+        //     if(freq[nums[i]] > 1){
+        //         return nums[i];
+        //     }
+        // }
+        // return -1;
+        
+        
+        // runs perfectly, even the changes in array were again backed.
+        // time -> O(n), space -> O(1).
+//         int ret = 0;
+//         for(int i = 0; i < nums.length; i++){
+//             int curr = Math.abs(nums[i]);
+//             if(nums[curr] < 0){
+//                 ret = curr;
+//                 break;
+//             }else{
+//                 nums[curr] *= -1;
+//             }
+//         }
+        
+//         for(int i = 0; i < nums.length; i++){
+//             nums[i] = Math.abs(nums[i]);
+//         }
+        
+//         return ret;
+        
+        
+        // used binary search on the indexes, as they are sorted and also it should be in              the range 1 to n.  time-> O(nlogn), space -> O(1).
+//         int low = 0;
+//         int high = nums.length-1;
+//         int ret = -1;
+        
+//         while(low <= high){
+            
+//             int cur = (low+high)/2;
+            
+//             int count = 0;
+//             for(int i = 0; i < nums.length; i++){
+//                 if(nums[i] <= cur){
+//                     count++;
+//                 }
+//             }
+            
+//             if(count > cur){
+//                 ret = cur;
+//                 high = cur-1;
+//             }else{
+//                 low = cur+1;
+//             }
+//         }
+        
+//         return ret;
+        
+        
+        // named algorithm -> Floyd's Tortoise and Hare(Cycle Detection).
+        // time-> O(n), space -> O(1).
+        int tortoise = nums[0];
+        int hare = nums[0];
+        
+        // Find the intersection point of the two runners.
+        do{
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        }while(tortoise != hare);
+        
+        // Find the "entrance" to the cycle.
+        tortoise = nums[0];
+        
+        while(tortoise != hare){
+            tortoise = nums[tortoise];
+            hare = nums[hare];
+        }
+        
+        return hare;
+    }
+}
