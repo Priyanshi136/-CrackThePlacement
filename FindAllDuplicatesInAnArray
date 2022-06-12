@@ -3,7 +3,7 @@ class Solution {
         
         ArrayList<Integer> a = new ArrayList<>();
         
-        // working approach, only the thing is time -> O(nlogn) due to sorting and hence the array is also modified. Space -> O(1).
+        // working approach, only the thing is time -> O(nlogn) due to sorting and hence the              array is also modified. Space -> O(1).
         // Arrays.sort(nums);
         // for(int i = 0; i < nums.length-1; i++){
         //     if(nums[i] == nums[i+1]){
@@ -13,28 +13,39 @@ class Solution {
         // return a;
         
         
-        // for(int i = 0; i < nums.length; i++){
-        //     if(nums[Math.abs(nums[i])] < 0){
-        //         a.add(Math.abs(nums[i]));
-        //     }else{
-        //         nums[Math.abs(nums[i])] = -1 * nums[Math.abs(nums[i])];
-        //     }
-        // }
-        // return a;
-        
-        
-        int n = nums.length;
-        for(int i = 0; i < n; i++){
-            nums[nums[i]%n] += n;
-        }
-        
-        for(int i = 0; i < n; i++){
-            if(nums[i] >= n * 2 && nums[i]%n != 0){
-                a.add(i);
-            }else if(nums[i] > n*2 && nums[i]%n == 0){
-                a.add(n);
+        // working approach, submitted successfully. time-> O(n), space -> O(1).
+        for(int i = 0; i < nums.length; i++){
+            if(nums[Math.abs(nums[i]) - 1] < 0){
+                a.add(Math.abs(nums[i]));
+            }else{
+                nums[Math.abs(nums[i])-1] = -1 * nums[Math.abs(nums[i])-1];
             }
         }
         return a;
+        
+        
+        /*So, the input array can be used as a HashMap. While Traversing the array, if an element ‘a’ is encountered then increase the value of a%n‘th element by n. 
+          The frequency can be retrieved by dividing the a % n’th element by n.
+         --> For every element in the array increment the arr[i]%n‘th element by n.
+         --> Now traverse the array again and print all those indexes i for which arr[i]/n is greater than 1. Which guarantees that the number n has been added to 
+         that index
+         --> and arr[i] would be greater than n only if a value “i” has appeared more than once.
+         --> Only the thing is it will only work if elements are in range of 0 to n-1.
+         
+         Hence not working here.
+        
+//         int n = nums.length;
+//         for(int i = 0; i < n; i++){
+//             nums[nums[i]%n] += n;
+//         }
+        
+//         for(int i = 0; i < n; i++){
+//             if(nums[i] >= n * 2 && nums[i]%n != 0){
+//                 a.add(i);
+//             }else if(nums[i] > n*2 && nums[i]%n == 0){
+//                 a.add(n);
+//             }
+//         }
+//         return a;
     }
 }
