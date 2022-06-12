@@ -1,0 +1,40 @@
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        
+        ArrayList<Integer> a = new ArrayList<>();
+        
+        // working approach, only the thing is 
+        // Arrays.sort(nums);
+        // for(int i = 0; i < nums.length-1; i++){
+        //     if(nums[i] == nums[i+1]){
+        //         a.add(nums[i]);
+        //     }
+        // }
+        // return a;
+        
+        
+        for(int i = 0; i < nums.length; i++){
+            if(nums[Math.abs(nums[i]) - 1] < 0){
+                a.add(Math.abs(nums[i]));
+            }else{
+                nums[Math.abs(nums[i])-1] = -1 * nums[Math.abs(nums[i])-1];
+            }
+        }
+        return a;
+        
+        
+//         int n = nums.length;
+//         for(int i = 0; i < n; i++){
+//             nums[nums[i]%n] += n;
+//         }
+        
+//         for(int i = 0; i < n; i++){
+//             if(nums[i] >= n * 2 && nums[i]%n != 0){
+//                 a.add(i);
+//             }else if(nums[i] > n*2 && nums[i]%n == 0){
+//                 a.add(n);
+//             }
+//         }
+//         return a;
+    }
+}
