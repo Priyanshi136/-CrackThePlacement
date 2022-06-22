@@ -1,0 +1,36 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        
+     // M-1 -> By finding middle index through traversing.(time-> O(N), space-> O(1))
+//         ListNode temp = head;
+//         int count = 0;
+//         while(temp != null){
+//             count++;
+//             temp = temp.next; 
+//         }
+        
+//         int ret = count/2;
+//         for(int i = 0; i < ret; i++){
+//             head = head.next;
+//         }
+//         return head;
+        
+        // M-2 --> using fast and slow pointer.(time-> O(N), space-> O(1))
+        ListNode fast = head, slow = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
