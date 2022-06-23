@@ -1,0 +1,30 @@
+class Solution {
+    public int maxArea(int[] height) {
+        
+        // M-2 Optimized approach -> done in single pass(time-> O(N), space-> O(1)).
+        // By moving only the shorter line's pointer.
+        int n = height.length;
+        int i = 0, j = n-1;
+        int max = 0;
+        
+        while(i < j){
+            int width = j - i;
+            max = Math.max(max, Math.min(height[i], height[j]) * width);
+            if(height[i] <= height[j]){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return max;
+        
+        // Brute force approach -> checking for all poosible pair of lines (time->  O(N2), space-> O(1)).
+        // for(int i = 0; i < n; i++){
+        //     for(int j = i+1; j < n; j++){
+        //         int width = j - i;
+        //         max = Math.max(max, Math.min(height[i], height[j]) * width);
+        //     }
+        // }
+        // return max;
+    }
+}
