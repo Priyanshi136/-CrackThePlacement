@@ -2,6 +2,8 @@ class Main
 {
 	/* Function to get index of
 	ceiling of x in arr[low..high]*/
+	
+	// Used binary search, hence, time-> O(logn), space-> O(1).
 	static int ceilSearch(int arr[], int low, int high, int x)
 	{
 	// base condition if length of arr == 0 then return -1
