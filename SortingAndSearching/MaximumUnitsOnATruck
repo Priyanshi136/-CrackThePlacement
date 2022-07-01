@@ -1,0 +1,49 @@
+class Solution {
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+        
+        
+        /* 1. First of all sort the given the 2-D array in descending order of their number of units.(Hence time-> O(n2).
+          2. Then just maintain a while loop, traverse the given array and store the maximum no. of units till our number of boxes is less than the                        truckSize.
+        */
+        
+        sortbyColumn(boxTypes, 1);
+        
+        int ret = 0;
+        int rem = truckSize;
+        int cap = 0;
+        int i = 0;
+        while(cap < truckSize && i < boxTypes.length){
+            rem -= boxTypes[i][0];
+            if(rem >= 0){
+                ret += boxTypes[i][0] * boxTypes[i][1];
+                cap += boxTypes[i][0];
+            }else{
+                ret += (truckSize - cap) * boxTypes[i][1];
+                cap = truckSize;
+            }
+            i++;
+        }
+        return ret;
+        
+    }
+    
+    public static void sortbyColumn(int arr[][], int col)
+    {
+        // Using built-in sort function Arrays.sort
+        Arrays.sort(arr, new Comparator<int[]>() {
+            
+          @Override              
+          // Compare values according to columns
+          public int compare(final int[] entry1, 
+                             final int[] entry2) {
+  
+            // To sort in descending order revert 
+            // the '>' Operator
+            if (entry1[col] > entry2[col])
+                return -1;
+            else
+                return 1;
+          }
+        });  // End of function call sort().
+    }
+}
