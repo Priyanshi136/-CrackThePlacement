@@ -1,0 +1,26 @@
+class Solution {
+    public int maxArea(int h, int w, int[] hc, int[] vc) {
+        
+        
+        // As we are sorting the arrays, hence time-> O(nlogn), space-> O(1).
+        Arrays.sort(hc);
+        Arrays.sort(vc);
+        
+        long mod = 1000000007;
+        
+        int prv = 0;
+        long len = h-hc[hc.length-1];
+        for(int i = 0; i < hc.length; i++){
+            len = Math.max(len, hc[i]-prv);
+            prv = hc[i];
+        }
+        prv = 0;
+        long br = w-vc[vc.length-1];
+        for(int i = 0; i < vc.length; i++){
+            br = Math.max(br, vc[i]-prv);
+            prv = vc[i];
+        }
+        
+        return (int)((len*br)%mod);
+    }
+}
