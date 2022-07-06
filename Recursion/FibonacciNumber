@@ -1,0 +1,28 @@
+class Solution {
+    public int fib(int n) {
+        
+        
+        // M-1 --> Recursive solution.
+//         if(n == 0 || n == 1){
+//             return n;
+//         }
+        
+//         return fib(n-1) + fib(n-2);
+        
+        
+        // M-2
+        
+        int a = 1;
+        int b = 0;
+        int c;
+        while(n != 0){
+            c = a+b;
+            a = b;
+            b = c;
+            n--;
+        }
+        return b;
+        
+        // a combo of (n != 0) and  n-- or a single entity i.e. n-->0 [both are same].
+    }
+}
