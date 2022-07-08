@@ -1,0 +1,60 @@
+/*
+class Node
+{
+    int data;
+    Node next;
+    Node(int data)
+    {
+        this.data = data;
+        next = null;
+    }
+}
+*/
+class Solution
+{
+    //Function to sort a linked list of 0s, 1s and 2s.
+    static Node segregate(Node head)
+    {
+        // add your code here
+        
+        int z = 0;
+        int o = 0;
+        int t = 0;
+        
+        Node temp = head;
+        while(temp != null){
+            if(temp.data == 0){
+                z++;
+            }else if(temp.data == 1){
+                o++;
+            }else{
+                t++;
+            }
+            temp = temp.next;
+        }
+        
+        temp = head;
+        int i = 0;
+        while(i < z){
+            temp.data = 0;
+            temp = temp.next;
+            i++;
+        }
+        
+        i=0;
+        while(i < o){
+            temp.data = 1;
+            temp = temp.next;
+            i++;
+        }
+        
+        i=0;
+        while(i < t){
+            temp.data = 2;
+            temp = temp.next;
+            i++;
+        }
+        
+        return head;
+    }
+}
