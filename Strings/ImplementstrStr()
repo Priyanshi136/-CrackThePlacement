@@ -1,0 +1,37 @@
+class Solution {
+    public int strStr(String haystack, String needle) {
+        
+        // M-1 --> using inbuilt functions of the string. 
+        // Hence, time -> O(m*n) and space -> O(1).
+        // return haystack.indexOf(needle);
+        
+        
+        // M-2 --> Brute force solution, using two pointer and comparing each item.
+        // Hence, time -> O(m*n) and space -> O(1);
+        int i = 0, j = 0, ret = 0;
+        
+        while(i < haystack.length() && j < needle.length()){
+            
+            if(haystack.charAt(i) == needle.charAt(j)){
+                if(j == 0){
+                    ret = i;
+                }
+                i++;
+                j++;
+            }else{
+                if(j != 0){
+                    j = 0;
+                    i = ret+1;
+                }else{
+                    i++;
+                }
+                ret = 0;
+            }
+        }
+        if(j == needle.length()){
+            return ret;
+        }else{
+            return -1;
+        }
+    }
+}
