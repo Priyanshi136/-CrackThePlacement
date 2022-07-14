@@ -1,0 +1,35 @@
+class Solution {
+    public String reverseWords(String s) {
+        
+       ArrayList<String> list = new ArrayList<>();
+        
+        for(int i =0; i < s.length(); i++){
+            String small = "";
+            while(i < s.length() && s.charAt(i) != ' '){
+                small += s.charAt(i);
+                i++;
+            }
+            if(small != ""){
+                list.add(small);
+            }
+            
+        }
+        
+        int i = 0, j = list.size()-1;
+        while(i <= j){
+            String temp = list.get(i);
+            list.set(i, list.get(j));
+            list.set(j, temp);
+            i++;
+            j--;
+        }
+        
+        String ret = "";
+        int k = 0;
+        for(k = 0; k < list.size()-1; k++){
+            ret += list.get(k) + " ";
+        }
+        ret += list.get(k);
+        return ret;
+    }
+}
