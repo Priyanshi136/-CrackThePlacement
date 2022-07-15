@@ -1,0 +1,84 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        
+        ListNode fast = head, slow = head, cur = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            cur = slow;
+            slow = slow.next;
+        }
+        
+        ListNode midHead = reverse(slow);
+        cur.next = null;
+        cur.next = midHead;
+        
+        ListNode temp = midHead;
+        ListNode temp1 = head;
+        
+        while(temp1 != midHead){
+            if(temp1.val != temp.val){
+                return false;
+            }
+            temp1 = temp1.next;
+            temp = temp.next;
+        }
+        
+        return true;
+        
+//         ListNode temp = head;
+//         int count = 0;
+        
+//         while(temp != null){
+//             temp = temp.next;
+//             count++;
+//         }
+        
+//         int a[] = new int[count];
+        
+//         temp = head;
+//         int i = 0;
+//         while(temp != null){
+//             a[i] = temp.val;
+//             temp = temp.next;
+//             i++;
+//         }
+        
+//         return isPalindrome(a, 0, a.length-1);
+        
+    }
+    
+    public ListNode reverse(ListNode head){
+        
+        if(head == null || head.next == null){
+            return head;
+        } 
+        
+        ListNode small = reverse(head.next);
+        head.next.next = head;
+        head.next = null;
+        return small;
+    }
+    
+//     public boolean isPalindrome(int a[], int i, int j){
+        
+//         if(i > j){
+//             return true;
+//         }
+        
+//         if(a[i] == a[j]){
+//             return isPalindrome(a, i+1, j-1);
+//         }else{
+//             return false;
+//         }
+//     }
+}
