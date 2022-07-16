@@ -1,0 +1,22 @@
+class Solution {
+    public static int minimum_difference(int n, String[] words) {
+        // code here
+        
+        int max = Integer.MAX_VALUE;
+        
+        for(int i = 0; i < n-1; i++){
+            for(int j = i+1; j < n; j++){
+                int cur = 0;
+                for(int k = 0; k < words[i].length(); k++){
+                    int a = words[i].charAt(k);
+                    int b = words[j].charAt(k);
+                    
+                    cur += Math.max(a, b) - Math.min(a,b);
+                }
+                max = Math.min(cur, max);
+            }
+        }
+        
+        return max;
+    }
+}
