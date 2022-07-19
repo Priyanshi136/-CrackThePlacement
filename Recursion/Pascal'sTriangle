@@ -1,0 +1,46 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        
+        if(numRows == 1){
+            List<List<Integer>> ans = new ArrayList<>();
+            List<Integer> ret = new ArrayList<Integer>();
+            ret.add(1);
+            ans.add(ret);
+            return ans;
+        }
+        
+        if(numRows == 2){
+            List<List<Integer>> ans = new ArrayList<>();
+            List<Integer> ret = new ArrayList<Integer>();
+            ret.add(1);
+            ans.add(ret);
+            List<Integer> ret1 = new ArrayList<Integer>();
+            ret1.add(1);
+            ret1.add(1);
+            ans.add(ret1);
+            return ans;
+        }
+        
+        List<List<Integer>> small = generate(numRows-1);
+        List<List<Integer>> ans = new ArrayList<>();
+        
+        int n = small.size();
+        
+        for(int i = 0; i < n; i++){
+            ans.add(small.get(i));
+        }
+        
+        List<Integer> ret = new ArrayList<Integer>();
+        for(int i = 0; i < small.get(n-1).size()-1; i++){
+            if(i == 0){
+                ret.add(1);
+                // continue;
+            }
+            
+            ret.add(small.get(n-1).get(i) + small.get(n-1).get(i+1));
+        }
+        ret.add(1);
+        ans.add(ret);
+        return ans;
+    }
+}
