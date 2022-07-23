@@ -1,0 +1,105 @@
+class MyQueue {
+    
+    // M-1, time-> O(N), space-> O(2n).
+//     Stack<Integer> front;
+//     Stack<Integer> rear;
+    
+//     public MyQueue() {
+        
+//         front = new Stack();
+//         rear = new Stack();
+//     }
+    
+//     public void push(int x) {
+//         if(front == null){
+//             front.push(x);
+//         }else{
+//             while(!front.isEmpty()){
+//                 rear.push(front.pop());
+//             }
+//             front.push(x);
+//             while(!rear.isEmpty()){
+//                 front.push(rear.pop());
+//             }
+//         }
+//     }
+    
+//     public int pop() {
+//         if(front == null){
+//             return -1;
+//         }
+//         int ans = front.pop();
+//         return ans;
+//     }
+    
+//     public int peek() {
+//         return front.peek();
+//     }
+    
+//     public boolean empty() {
+//         return front.isEmpty();
+//     }
+    
+    /*
+    
+    Amortized Approach ->
+    Amortized analysis gives the average performance (over time) of each operation in the worst case. The basic idea is that a worst case operation can alter the 
+    state in such a way that the worst case cannot occur again for a long time, thus amortizing its cost.
+    
+    Hence the total time complexity of the sequence is : n (for push operations) + 2*n (for first pop operation) + n - 1 ( for pop operations) which is O(2*n).
+    This gives O(2n/2n) = O(1) average time per operation.
+    
+    For better understanding, refer to the solution section of leetcode.
+    
+    Hence, time-> O(1), space-> O(2n).
+    */
+    
+    Stack<Integer> front;
+    Stack<Integer> rear;
+    
+    public MyQueue() {
+        
+        front = new Stack();
+        rear = new Stack();
+    }
+    
+    public void push(int x) {
+        front.push(x);
+    }
+    
+    public int pop() {
+        
+        if(!rear.isEmpty()){
+            return rear.pop();
+        }else{
+            while(!front.isEmpty()){
+                rear.push(front.pop());
+            }
+            return rear.pop();
+        }
+    }
+    
+    public int peek() {
+        if(!rear.isEmpty()){
+            return rear.peek();
+        }else{
+            while(!front.isEmpty()){
+                rear.push(front.pop());
+            }
+            return rear.peek();
+        }
+    }
+    
+    public boolean empty() {
+        return front.isEmpty() && rear.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
