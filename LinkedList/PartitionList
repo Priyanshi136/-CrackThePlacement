@@ -11,6 +11,8 @@
 class Solution {
     public ListNode partition(ListNode head, int x) {
         
+         // using two pointers and dummy nodes.
+        // time-> O(N), space-> O(1).
         ListNode temp = head;
         ListNode temp1 = null;
         ListNode temp2 = temp1;
