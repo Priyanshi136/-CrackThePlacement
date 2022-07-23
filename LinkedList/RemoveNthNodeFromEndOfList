@@ -11,34 +11,55 @@
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         
-        if(head == null){
-            return head;
+        // M-1 Brute force, time-> O(2n), space-> O(1).
+//         if(head == null){
+//             return head;
+//         }
+        
+//         int i = 1;
+//         ListNode temp = head;
+//         while(temp != null){
+//             temp = temp.next;
+//             i++;
+//         }
+        
+//         if(n == i-1){
+//             return head.next;
+//         }
+        
+        
+//         int j = i-n-1;
+//         int k = 1;
+//         temp = head;
+//         while(k<j){
+//             k++;
+//             temp = temp.next;
+//         }
+        
+//         if(temp.next != null){
+//             temp.next = temp.next.next;
+//         }
+//         // internal delete() function to delete unecessary nodes.
+//         return head;
+        
+        
+        // M-2 Optimized approach, using two pointers
+        // time -> O(n), space -> O(1).
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+        
+        for(int i = 1; i <= n; i++){
+            fast = fast.next;
         }
         
-        int i = 1;
-        ListNode temp = head;
-        while(temp != null){
-            temp = temp.next;
-            i++;
+        while(fast.next != null){
+            fast = fast.next;
+            slow = slow.next;
         }
         
-        if(n == i-1){
-            return head.next;
-        }
-        
-        
-        int j = i-n-1;
-        int k = 1;
-        temp = head;
-        while(k<j){
-            k++;
-            temp = temp.next;
-        }
-        
-        if(temp.next != null){
-            temp.next = temp.next.next;
-        }
-        
-        return head;
+        slow.next = slow.next.next;
+        return dummy.next;
     }
 }
