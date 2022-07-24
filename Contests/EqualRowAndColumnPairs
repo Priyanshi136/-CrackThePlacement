@@ -1,0 +1,33 @@
+class Solution {
+    public int equalPairs(int[][] grid) {
+        
+        int r = grid.length;
+        int c = grid[0].length;
+        int help[][] = new int[r][c];
+        
+        for(int i = 0; i < r; i++){
+            for(int j = 0; j < c; j++){
+                help[i][j] = grid[j][i];
+            }
+        }
+        
+        int i = 0;
+        int count = 0;
+        while(i < c){
+            for(int j = 0; j < c; j++){
+                int k = 0;
+                for(k = 0; k < r; k++){
+                    if(help[k][i] != grid[k][j]){
+                        break;
+                    }
+                }
+                if(k == r){
+                    count++;
+                }
+            }
+            i++;
+        }
+        
+        return count;
+    }
+}
