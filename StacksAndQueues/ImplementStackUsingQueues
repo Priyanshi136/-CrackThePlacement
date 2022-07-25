@@ -1,0 +1,74 @@
+// using one queue only.
+class MyStack {
+    
+    Queue<Integer> front;
+    
+    public MyStack() {
+        front = new LinkedList<>();
+    }
+    
+    public void push(int x) {
+        front.add(x);
+        int sz = front.size();
+        while(sz > 1){
+            front.add(front.remove());
+            sz--;
+        }
+    }
+    
+    public int pop() {
+        return front.remove();
+    }
+    
+    public int top() {
+        return front.peek();
+    }
+    
+    public boolean empty() {
+        return front.isEmpty();
+    }
+}
+
+// using two queues.
+// class MyStack {
+    
+//     Queue<Integer> front;
+//     Queue<Integer> rear;
+    
+//     public MyStack() {
+//         front = new LinkedList<>();
+//         rear = new LinkedList<>();
+//     }
+    
+//     public void push(int x) {
+//         while(!front.isEmpty()){
+//             rear.add(front.remove());
+//         }
+//         front.add(x);
+//         while(!rear.isEmpty()){
+//             front.add(rear.remove());
+//         }
+//     }
+    
+//     public int pop() {
+//         return front.remove();
+//     }
+    
+//     public int top() {
+//         return front.peek();
+//     }
+    
+//     public boolean empty() {
+//         return front.isEmpty();
+//     }
+// }
+
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
