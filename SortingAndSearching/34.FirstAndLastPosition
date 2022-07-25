@@ -1,0 +1,80 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        
+        // using binary search, time -> O(logn)approx. and space-> O(1).
+        int[] ans = {-1, -1};
+        
+        
+        int l = 0, h = nums.length-1;
+        int mid = 0;
+        while(l <= h){
+            mid = l+(h-l)/2;
+            if(nums[mid] == target){
+                break;
+            }else if(nums[mid] < target){
+                l = mid+1;
+            }else{
+                h = mid-1;
+            }
+        }
+        
+        int i = mid;
+        while(i > 0 && nums[i-1] == target){
+            i--;
+        }
+        
+        int j = mid;
+        while(j < nums.length-1 && nums[j+1] == target){
+            j++;
+        }
+        
+        if(l > h){
+            return ans;
+        }
+        ans[0] = i;
+        ans[1] = j;
+        return ans;
+    }
+    
+    // New method, approach is same.
+//     public int[] searchRange(int[] nums, int target) {
+//         int[] res= new int[2];
+//         res[0]= findFirstIndex(nums, target);
+//         res[1]= findLastIndex(nums, target);
+//         return res;
+//     }
+    
+//     public int findFirstIndex(int[] nums, int target){
+//         int start=0;
+//         int end= nums.length-1;
+//         int mid=0;
+//         int sol=-1;
+//         while(start<=end){
+//             mid= (start+end)/2;
+//             if(nums[mid]>=target){
+//                 end= mid-1;
+//             }else if(nums[mid]<target){
+//                 start=mid+1;
+//             }
+//             if(nums[mid]==target) sol= mid;
+//         }
+//         return sol;
+//     }
+    
+//     public int findLastIndex(int[] nums, int target){
+//         int start=0;
+//         int end= nums.length-1;
+//         int mid=0;
+//         int sol=-1;
+//         while(start<=end){
+//             mid= (start+end)/2;
+//             if(nums[mid]>target){
+//                 end= mid-1;
+//             }else if(nums[mid]<=target){
+//                 start=mid+1;
+//             }
+//             if(nums[mid]==target) sol= mid;
+//         }
+//         return sol;
+//     }
+}
