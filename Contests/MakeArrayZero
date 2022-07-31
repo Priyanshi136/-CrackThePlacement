@@ -1,0 +1,21 @@
+class Solution {
+    public int minimumOperations(int[] nums) {
+        
+        int n = nums.length;
+        Arrays.sort(nums);
+        int count = 0;
+        
+        while(nums[n-1] > 0){
+            int i = 0;
+            while(nums[i] == 0){
+                i++;
+            }
+            int min = nums[i];
+            for(;i < n; i++){
+                nums[i] = nums[i] - min;
+            }
+            count++;
+        }
+        return count;
+    }
+}
