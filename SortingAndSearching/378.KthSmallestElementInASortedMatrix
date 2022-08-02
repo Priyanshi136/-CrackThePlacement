@@ -1,0 +1,34 @@
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+      
+        // M-2, using PriorityQueue(MAX HEAP).
+        // Hence time-> O(n*logk), space-> O(k).
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[i].length; j++){
+                pq.add(matrix[i][j]);
+                if(pq.size() > k){
+                    pq.poll();
+                }
+            }
+        }
+        
+        return pq.peek();
+        
+        
+        // M-1 -> Brute force approach, by sorting the array.
+        // Hence time-> O(n*n), and space-> O(n*n).
+//         int n = matrix.length;
+//         int a[] = new int[n*n];
+//         int l = 0;
+        
+//         for(int i = 0; i < n; i++){
+//             for(int j = 0; j < n; j++){
+//                 a[l++] = matrix[i][j];
+//             }
+//         }
+//         Arrays.sort(a);
+//         return a[k-1];
+    }
+}
