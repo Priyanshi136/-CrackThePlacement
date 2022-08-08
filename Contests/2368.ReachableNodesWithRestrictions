@@ -1,0 +1,52 @@
+class Solution {
+    public int reachableNodes(int n, int[][] edges, int[] restricted) {
+        
+        // HashMap<Integer, Integer> map = new HashMap<>();
+        // for(int i = 0; i < restricted.length; i++){
+        //     map.put(restricted[i], i);
+        // }
+        
+        // int matrix[][] = new int[n][n];
+        // for(int i = 0; i < n-1; i++){
+        //     int a = edges[i][0];
+        //     int b = edges[i][1];
+        //     matrix[a][b] = 1;
+        //     matrix[b][a] = 1;
+        // }
+        
+        int k = restricted.length;
+        ArrayList<Integer> arr[] = new ArrayList[n];
+        for(int i = 0; i < n; i++){
+            arr[i] = new ArrayList<>();
+        }
+        for(int i = 0; i < n-1; i++){
+            arr[edges[i][0]].add(edges[i][1]);
+            arr[edges[i][1]].add(edges[i][0]);
+        }
+        
+        boolean visited[] = new boolean[n];
+        for(int i = 0; i < k; i++){
+            visited[restricted[i]] = true;
+        }
+        
+        Queue<Integer> pending = new LinkedList<>();
+        pending.add(0);
+        while(!pending.isEmpty()){
+            int s = pending.remove();
+            for(int i = 0; i < arr[s].size(); i++){
+                if(!visited[arr[s].get(i)]){
+                    pending.add(arr[s].get(i));
+                }
+            }
+            visited[s] = true;
+        }
+        int count = 0;
+        for(int i = 0; i < n; i++){
+            if(visited[i]){
+                count++;
+            }
+        }
+        return count-k;
+    }
+    
+}
