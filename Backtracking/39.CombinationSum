@@ -1,0 +1,36 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        
+        int n = candidates.length;
+        List<Integer> ans = new ArrayList<>();
+        List<List<Integer>> small = new ArrayList<>();
+        helper(0, n, candidates, target, ans, small);
+        // or we can also give a list in input as 
+        // helper(0, n, candidates, target, new ArrayList<>(), small)
+        // both means same.
+        return small;
+    }
+    
+    public void helper(int start, int n, int candidates[], int target, List<Integer> ans, List<List<Integer>> small){
+        
+        if(start >= n){
+           return;
+        }
+        
+        if(target < 0){
+            return;
+        }
+        
+         if(target == 0){
+             // we are doing this, because directly we just get the refernce of the list and hence in answer it will be printed onlt the empty list. And so to avoid this, we have to first copy the list and then add. {new ArrayList(ans)}
+            small.add(new ArrayList(ans));
+            return;
+        }
+        
+        ans.add(candidates[start]);
+        helper(start, n, candidates, target-candidates[start], ans, small);
+        ans.remove(ans.size()-1);
+        helper(start+1, n, candidates, target, ans, small);
+        
+    }
+}
