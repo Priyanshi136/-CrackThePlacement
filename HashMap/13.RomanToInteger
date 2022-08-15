@@ -1,0 +1,85 @@
+class Solution {
+    public int romanToInt(String s) {
+        
+        // alternate method, using recursion.
+//         if(s.length() <= 0){
+//             return 0;
+//         }
+        
+//         if(s.length() == 1){
+//             return helper(s.charAt(0));
+//         }
+        
+//         int ret = 0;
+//         String temp = s.substring(0, 2);
+//         if(helper(temp) != 0){
+//             ret = romanToInt(s.substring(2)) + helper(temp);
+//         }else{
+//             ret = romanToInt(s.substring(1)) + helper(s.charAt(0));
+//         }
+        
+//         return ret;
+        
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+        
+        int ret = map.get(s.charAt(s.length()-1));
+        for(int i = s.length()-2; i >= 0; i--){
+            if(map.get(s.charAt(i)) >= map.get(s.charAt(i+1))){
+                ret += map.get(s.charAt(i));
+            }else{
+                ret -= map.get(s.charAt(i));
+            }
+        }
+        
+        return ret;
+    }
+    
+    public int helper(String s){
+        
+        switch(s){
+            case "IV":
+                return 4;
+            case "IX":
+                return 9;
+            case "XL":
+                return 40;
+            case "XC":
+                return 90;
+            case "CD":
+                return 400;
+            case "CM":
+                return 900;
+            default:
+                return 0;
+        }
+    }
+    
+    public int helper(char c){
+        
+        switch(c){
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+}
