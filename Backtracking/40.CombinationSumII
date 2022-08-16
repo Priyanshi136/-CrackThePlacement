@@ -1,7 +1,9 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         
-        // M-2 optimized one, other that this, we can also use a brute force method. In which we can use a Set, instead of a list to avoid duplicates. But it has higher time and space complexity, as after storing it into set we have to again it into a list. Hence to optimize it, we have sorted the list and have put some checks.
+        // M-2 optimized one, other that this, we can also use a brute force method. In which we can use a Set, instead of a list to avoid duplicates. 
+        // But it has higher time and space complexity, as after storing it into set we have to again it into a list. Hence to optimize it, we have sorted the list 
+        // and have put some checks.
         // time-> O(2^n * k), space-> O(k*x);
         Arrays.sort(candidates);
         int n = candidates.length-1;
@@ -18,7 +20,8 @@ class Solution {
         }
         
         for(int i = start; i <= n; i++){
-            // i > start, we put this condition, because we have to pick the first(current) index of it, irrespective of it is a duplicate or not. But as soon as our i > start, i.e. 2nd or whatever after that, we don't have to take that.
+            // i > start, we put this condition, because we have to pick the first(current) index of it, irrespective of it is a duplicate or not. 
+            // But as soon as our i > start, i.e. 2nd or whatever after that, we don't have to take that.
             if(i > start && candidates[i] == candidates[i-1]){
                 continue;
             }
