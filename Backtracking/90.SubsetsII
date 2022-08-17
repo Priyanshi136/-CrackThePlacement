@@ -1,0 +1,39 @@
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        
+        // M-1, Brute force approach. As simply as we generate all the subsets including the duplicates also. And then we will put them all into a hashmap. 
+        // And then again we retrieve from their and put them into a list. By, this we will only left with the unique sets. However, it will take extra time in \
+        // inserting into the map and then again removing it and inserting into the list. And also extra space in the from of the map.
+        
+        // M-2, optimised approach. by sorting and putting some checks.
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        helper(nums, 0, n, new ArrayList(), ans);
+        return ans;
+    }
+    
+    void helper(int nums[], int start, int n, ArrayList small, List<List<Integer>> ans){
+        
+        // everytime we call this function, irrespective of anything we have to add the current list into the ans. Even you can remove the condition also. 
+        // As if this function is called then ofcourse the start <= n only. since  we are running for loop till n only na!
+        if(start <= n){
+            ans.add(new ArrayList(small));
+        }
+        
+        if(start > n){
+            return;
+        }
+        
+        for(int i = start; i < n; i++){
+            
+            // this check for not including the duplicates.
+            if(i > start && nums[i] == nums[i-1]){
+                continue;
+            }
+            small.add(nums[i]);
+            helper(nums, i+1, n, small, ans);
+            small.remove(small.size()-1);
+        }
+    }
+}
