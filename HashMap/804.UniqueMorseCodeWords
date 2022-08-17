@@ -1,0 +1,24 @@
+class Solution {
+    public int uniqueMorseRepresentations(String[] words) {
+        
+        HashMap<String, Integer> map = new HashMap<>();
+        for(int i = 0; i < words.length; i++){
+            String s = "";
+            for(int j = 0; j < words[i].length(); j++){
+                s += helper(words[i].charAt(j) - 'a');
+            }
+            words[i] = s;
+            map.put(words[i], 1);
+        }
+        
+        return map.size();
+    }
+    
+    public String helper(int a){
+        
+        String arr[] = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--",
+        "-..-","-.--","--.."};
+        
+        return arr[a];
+    }
+}
