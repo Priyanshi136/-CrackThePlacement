@@ -1,0 +1,22 @@
+//User function Template for Java//User function Template for Java
+class Solution{
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int N){
+        // code here
+        ArrayList<Integer> ret = new ArrayList<>();
+        helper(0, arr, 0, ret, N);
+        return ret;
+    }
+    
+    void helper(int start, ArrayList<Integer> arr, int sum, ArrayList<Integer> ret, int N){
+        
+        if(start >= N){
+            ret.add(sum);
+            return;
+        }
+        
+        sum += arr.get(start);
+        helper(start+1, arr, sum, ret, N);
+        sum -= arr.get(start);
+        helper(start+1, arr, sum, ret, N);
+    }
+}
