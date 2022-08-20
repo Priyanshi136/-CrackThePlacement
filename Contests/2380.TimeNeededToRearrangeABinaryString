@@ -1,0 +1,21 @@
+class Solution {
+    public int secondsToRemoveOccurrences(String s) {
+        
+        int count = 0;
+        char c[] = s.toCharArray();
+        while(s.contains("01")){
+            for(int i = 0; i < s.length()-1; i++){
+                if(c[i] == '0' && c[i+1] == '1'){
+                    char temp = c[i];
+                    c[i]= c[i+1];
+                    c[i+1] = temp;
+                    i++;
+                }
+            }
+            s = String.valueOf(c);
+            c = s.toCharArray();
+            count++;
+        }
+        return count;
+    }
+}
