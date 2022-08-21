@@ -1,0 +1,66 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        
+        // M-1, using some extra space with the recursion, in the form of hashmaps, to keep a check whether we have included a specific element or not.
+        // Hence, space-> O(n)[small array] + O(n)[for map] and time-> O(n!*n).
+//         int n = nums.length;
+//         List<List<Integer>> ans = new ArrayList<>();
+//         HashMap<Integer, Boolean> map = new HashMap<>();
+//         for(int i = 0; i < nums.length; i++){
+//             map.put(nums[i], false);
+//         }
+//         helper(n ,nums, new ArrayList(), ans, map);
+//         return ans;
+//     }
+    
+//     void helper(int n, int[] nums, ArrayList small, List<List<Integer>> ans,  HashMap<Integer, Boolean> map){
+        
+//         if(small.size() == n){
+//             ans.add(new ArrayList(small));
+//             return;
+//         }
+        
+//         for(int i = 0; i < n; i++){
+//             if(map.get(nums[i]) == false){
+//                 small.add(nums[i]);
+//                 map.put(nums[i], true);
+//                 helper(n, nums, small, ans, map);
+//                 small.remove(small.size()-1);
+//                 map.put(nums[i], false);
+//             }
+//         }
+//     }
+        
+        // M-2, using swapping. Hence no need of using extra space.
+        int n = nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        helper(n ,nums, new ArrayList(), ans, 0);
+        return ans;
+    }
+    
+    void helper(int n, int[] nums, ArrayList small, List<List<Integer>> ans, int start){
+        
+        if(start == n){
+            ans.add(new ArrayList(small));
+            return;
+        }
+        
+        for(int i = start; i < n; i++){
+            small.add(nums[i]);
+            
+            // swapping
+            int temp = nums[start];
+            nums[start] = nums[i];
+            nums[i] = temp;
+            
+            //function call
+            helper(n, nums, small, ans, start+1);
+            small.remove(small.size()-1);
+            
+            // anti swapping
+            int tem = nums[start];
+            nums[start] = nums[i];
+            nums[i] = tem;
+        }
+    }
+}
