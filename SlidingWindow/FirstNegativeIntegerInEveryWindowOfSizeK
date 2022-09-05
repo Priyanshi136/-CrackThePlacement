@@ -1,0 +1,37 @@
+//User function Template for Java
+
+
+class Compute {
+    
+    public long[] printFirstNegativeInteger(long A[], int N, int K)
+    {
+        int n = N-K+1;
+        long arr[] = new long[n];
+        Queue<Long> q = new LinkedList<>();
+        int i = 0; // start of the window.
+        int j = 0; // end of the window.
+        int k =0; // for filling the output array, arr.
+        while(j < N){
+            if(A[j] < 0){ // keep track of every negative integer.
+                q.add(A[j]);
+            }
+            if(j-i+1 < K){ // window size < k --> j++ --> incrementing the size.
+                j++;
+            }else{
+                if(q.isEmpty()){ // edge case, no negative integer.
+                    arr[k] = 0;
+                    k++;
+                }else{ // top of the queue, is our first integer.
+                    arr[k] = q.peek();
+                    k++;
+                    if(A[i] == q.peek()){ // window size is changed.
+                        q.remove();
+                    }
+                }
+                i++;
+                j++;
+            }
+        }
+        return arr;
+    }
+}
