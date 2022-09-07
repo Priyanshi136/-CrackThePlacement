@@ -1,0 +1,40 @@
+// User function Template for Java
+
+class Solution {
+
+    int search(String pat, String txt) {
+        // code here
+        
+        int arr[] = new int[26];
+        for(int i = 0; i < pat.length(); i++){
+            char c = pat.charAt(i);
+            arr[c-'a']++;
+        }
+        
+        int i = 0;
+        int j = 0;
+        int count = 0;
+        while(j < txt.length()){
+            char c = txt.charAt(j);
+            arr[c-'a']--;
+            if(j-i+1 < pat.length()){
+                j++;
+            }else{
+                int k = 0;
+                for(k = 0; k < 26; k++){
+                    if(arr[k] != 0){
+                        break;
+                    }
+                }
+                if(k == 26){
+                    count++;
+                }
+                char d = txt.charAt(i);
+                arr[d-'a']++;
+                i++;
+                j++;
+            }
+        }
+        return count;
+    }
+}
