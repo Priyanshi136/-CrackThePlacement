@@ -4,32 +4,38 @@ class Solution {
 
     int search(String pat, String txt) {
         // code here
+        // M-1, we are using constant space i.e. 26 for storing all the alphabets of the
+        // english alphabets.
         
-        int arr[] = new int[26];
+        // M-2, we can use a map to keep the count of the alphabets. In worst case it is
+        // also not greater than the 26.
+        
+        // we are using method-1; hence, space-> O(26) and time-> O(n*26).
+        int arr[] = new int[26]; // for keeping the track of the elements of pat.
         for(int i = 0; i < pat.length(); i++){
             char c = pat.charAt(i);
-            arr[c-'a']++;
+            arr[c-'a']++; // incrementing the count of the current element.
         }
         
         int i = 0;
         int j = 0;
-        int count = 0;
+        int count = 0; // count, which we have to return.
         while(j < txt.length()){
             char c = txt.charAt(j);
-            arr[c-'a']--;
-            if(j-i+1 < pat.length()){
+            arr[c-'a']--; // decrementing the count.
+            if(j-i+1 < pat.length()){ // incrementing the size, as not equal to k.
                 j++;
             }else{
                 int k = 0;
                 for(k = 0; k < 26; k++){
-                    if(arr[k] != 0){
+                    if(arr[k] != 0){ // hence if it is not 0, it means not anagram.
                         break;
                     }
                 }
                 if(k == 26){
-                    count++;
+                    count++; // incrementing the count, if it is a anagram.
                 }
-                char d = txt.charAt(i);
+                char d = txt.charAt(i); // sliding the window, by removing the count.
                 arr[d-'a']++;
                 i++;
                 j++;
