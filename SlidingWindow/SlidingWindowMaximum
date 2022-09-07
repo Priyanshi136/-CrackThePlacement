@@ -2,28 +2,32 @@ public class Solution {
     // DO NOT MODIFY THE LIST. IT IS READ ONLY
     public ArrayList<Integer> slidingMaximum(final List<Integer> A, int B) {
         
-        ArrayList<Integer> ret = new ArrayList<>();
-        Deque<Integer> q = new LinkedList<>(); // for storing maximum every time.
+        ArrayList<Integer> ret = new ArrayList<>(); // resultant array
+        Deque<Integer> q = new LinkedList<>();  // to maintain the "kaam vale" elements.
+        // we are using Deque to remove from front as well as rear end.
         
         int i = 0;
         int j = 0;
         while(j < A.size()){
-            while(!q.isEmpty()){
-                if(A.get(j) > q.getLast()){ 
+            while(!q.isEmpty()){ // what elements we should contain in our Deque.
+                if(A.get(j) > q.getLast()){ // if the new element, which we are adding is greater, then
+                // we just don't need smaller elements before it. otherwise, i just have to add the
+                // element, because may be in future it can help us.(may be next greater);
                     q.pollLast();
                 }else{
                     break;
                 }
             }
-            q.addLast(A.get(j));
+            q.addLast(A.get(j)); // we are adding out maximun or kaam vale elements.
             
-            if(j-i+1 < B){
+            if(j-i+1 < B){ // if window size is less than k(or B).
                 j++;
             }else{
-                ret.add(q.peek());
+                ret.add(q.peek()); // we have to add the greatest element into our resultant array.
                 if(q.peekFirst() == A.get(i)){
-                    q.pollFirst();
+                    q.pollFirst(); // as we have done out work, we have to update out Deque.
                 }
+                // sliding the window.
                 i++;
                 j++;
             }
