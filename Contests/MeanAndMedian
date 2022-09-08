@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t; cin>>t;
+	while(t-->0){
+	    int x, y; cin>>x>>y;
+	    
+	   // int b = y;
+	   // int temp = x*3;
+	   // int small = temp-y;
+	   // for(int i = -1000; i < 1000; i++){
+	   //     int c = small-i;
+	   //     if(c >= -1000 && c <= 1000){ 
+	   //         // constraints are not that high, hence we can check for all values of a, i.e. between -1000 to 1000.
+	   //         cout<<i<<" "<<b<<" "<<c<<endl;
+	   //         break;
+	   //     }
+	   // }
+	   
+	   // O(1) solution.
+	   cout<<y<<" "<<y<<" "<<(3*x)-(2*y)<<endl;
+	}
+	return 0;
+}
