@@ -1,0 +1,32 @@
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        // code here
+        HashMap<Character, Integer> map = new HashMap<>(); // for getting track of unique 
+        // characters always, in our current substring.
+        int i =0;
+        int j = 0;
+        int max = -1; //final answer which we have to return.
+        while(j < s.length()){
+            map.put(s.charAt(j), map.getOrDefault(s.charAt(j), 0)+1); // maintaing the map
+            //for current element.
+            
+            if(map.size() < k){ // if size is less than k, then just increment it.
+                j++;
+            }else if(map.size() == k){ //if it is equal, then
+                max = Math.max(max, j-i+1); // find the length of the substring, as
+                j++; // it can be an answer.
+            }else{
+                while(map.size() > k){ // remove elements till the size is not equals to k
+                    if(map.get(s.charAt(i)) > 1){
+                        map.put(s.charAt(i), map.get(s.charAt(i))-1);
+                    }else{
+                        map.remove(s.charAt(i));
+                    }
+                    i++;
+                }
+                j++;
+            }
+        }
+        return max;
+    }
+}
