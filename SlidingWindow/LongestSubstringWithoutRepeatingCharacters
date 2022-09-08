@@ -1,0 +1,27 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        
+        // M-2, by sliding window and hashmaps.
+        HashMap<Character, Integer> map = new HashMap<>();
+        int i = 0;
+        int j = 0;
+        int max = 0;
+        while(j < s.length()){
+            map.put(s.charAt(j), map.getOrDefault(s.charAt(j), 0)+1);
+            
+            if(map.size() == j-i+1){ // if window size is equal to k, then one answer.
+                max = Math.max(max, j-i+1);
+                j++;
+            }else{
+                while(map.size() < j-i+1){ // if less than k, then duplicates present.
+                    if(map.get(s.charAt(i)) > 1){ // hence need to remove them.
+                        map.put(s.charAt(i), map.get(s.charAt(i))-1);
+                    }else{
+                        map.remove(s.charAt(i));
+                    }
+                    i++;
+                }
+                j++; // slide the window.
+            }
+        }
+        return max;
