@@ -1,0 +1,63 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        
+        // M-1, using sliding window and hashmaps.
+        HashMap<Character, Integer> map = new HashMap<>(); 
+        // to keep track of elements of t;
+        for(int i = 0; i < t.length(); i++){
+            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0)+1);
+        }
+        
+        int i = 0;
+        int j = 0;
+        int count = map.size(); 
+        // to check, if out current substring has all elements of t or not.
+        // In this case, we can just remove the element from our map, as soon as we get it. Because this time the negatives are also of out use.
+        int min = Integer.MAX_VALUE; // smallest length substring.
+        String ret = ""; // our resultant answer.
+        while(j < s.length()){
+            
+            //inital calculation
+            if(map.containsKey(s.charAt(j))){
+                map.put(s.charAt(j), map.get(s.charAt(j)) -1); 
+                // if contains that means i got one element for my t string, so we have to just decrease the count(mapped value) of that specific element.
+                if(map.get(s.charAt(j)) == 0){
+                    count--; // i have got all the count of that specific character in my string s, so now decrease the count. One character is done.
+                }
+            }
+            // check the condition
+            if(count > 0){ // we haven't got all the elements of the t yet.
+                j++; // so we will just increment the size of out window.
+            }else{
+                // it can be a possible answer.
+                if(min >= j-i+1){
+                    min = j-i+1;
+                    ret = s.substring(i, j+1);
+                }
+                
+                // we want minimum length of substring, therefore, try to reduce it as much as we can.
+                while(count<=0){ // till we have all elements of t in our substring.
+                    if(map.containsKey(s.charAt(i))){
+                        map.put(s.charAt(i), map.get(s.charAt(i)) +1);
+                        if(map.get(s.charAt(i)) > 0){ // it means, we don't have extra
+                            count++; // it is required one, so now we have to increase the count again.
+                        }
+                        
+                    }else{
+                        // if map not contains, then we can just directly remove it.
+                    }
+                    // before decreasing the size, we have to check if it is the possible answer, i.e. if it has less size.
+                    if(min >= j-i+1){
+                        min = j-i+1;
+                        ret = s.substring(i, j+1);
+                    }
+                    i++; // decreasing the size.
+                }
+                j++; // slide the window.
+                
+            }
+            
+        }
+        return ret;
+    }
+}
